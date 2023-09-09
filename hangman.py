@@ -7,8 +7,8 @@ HANGMAN_PICS = ['''
         ===''', '''
      +---+
      O   |
-        |
-        |
+         |
+         |
        ===''', '''
     +---+
     O   |
@@ -77,7 +77,7 @@ class Hangman:
         return self.guessing_word   
 
     def display_current_board(self):
-        print(HANGMAN_PICS)
+        print(HANGMAN_PICS[len(self.wrong_guess)])
         for letter in self.guessing_word:
             print(letter, end=' ')
 
