@@ -3,15 +3,14 @@
 FROM tiangolo/uvicorn-gunicorn-fastapi:python3.9-slim AS builder
 
 WORKDIR /code
-COPY requirements.txt /code
+COPY ./requirements.txt /code
 
-RUN --mount=type=cache,target=/root/.cache/pip \
-    pip install -r requirements.txt
+RUN pip install --no-cache-dir --upgrade -r requirements.txt
 
-COPY . .
+COPY . /code
 
 FROM builder as dev-envs
 
-# CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "80", "--reload"]
-# ENTRYPOINT ["python"]
-CMD ["python", "hello.py"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+
+# CMD ["python", "hello.py"]
